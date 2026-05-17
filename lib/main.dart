@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:phoria_app/Screens/inicio.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:phoria_app/firebase_options.dart';
+import 'package:phoria_app/Screens/login/login_pantalla.dart';
 import 'package:phoria_app/colores/temas.dart';
 import 'package:phoria_app/navegacion/main_navegacion.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    debugPrint('✓ Firebase inicializado correctamente');
+  } catch (e) {
+    debugPrint('✗ Error al inicializar Firebase: $e');
+  }
+
   runApp(const MyApp());
 }
+
+void unawaited(Future<void> future) {}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -36,7 +51,7 @@ class MyApp extends StatelessWidget {
       ),
 
       // Pantalla inicial 
-      home: const MainNavegacion(),
+      home: const LoginScreen(),
     );
   }
 }

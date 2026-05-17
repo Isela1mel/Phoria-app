@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "377322616450",
+    "project_id": "phoria-application",
+    "storage_bucket": "phoria-application.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377322616450:android:2d0c12dfaa626d96c9e69b",
+        "android_client_info": {
+          "package_name": "com.example.phoria_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYxVZlWyjb0xOBSWvJuzOIZDMYEGlBnWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
