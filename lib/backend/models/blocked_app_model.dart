@@ -1,19 +1,11 @@
-import 'package:hive/hive.dart';
-part 'blocked_app_model.g.dart';
-
-@HiveType(typeId: 3)
-class BlockedAppModel extends HiveObject {
-
-  @HiveField(0)
+class BlockedAppModel {
+  final String? id;
   final String userId;
-
-  @HiveField(1)
   final String appName;
-
-  @HiveField(2)
   final bool isBlocked;
 
   BlockedAppModel({
+    this.id,
     required this.userId,
     required this.appName,
     required this.isBlocked,
@@ -21,6 +13,7 @@ class BlockedAppModel extends HiveObject {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'userId': userId,
       'appName': appName,
       'isBlocked': isBlocked,
@@ -29,6 +22,7 @@ class BlockedAppModel extends HiveObject {
 
   factory BlockedAppModel.fromMap(Map<String, dynamic> map) {
     return BlockedAppModel(
+      id: map['id'],
       userId: map['userId'],
       appName: map['appName'],
       isBlocked: map['isBlocked'],

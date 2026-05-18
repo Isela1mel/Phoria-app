@@ -1,29 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hive/hive.dart';
-part 'user_model.g.dart';
 
-@HiveType(typeId: 0)
-class UserModel extends HiveObject {
-
-  @HiveField(0)
+class UserModel {
   final String name;
-
-  @HiveField(1)
   final String email;
-
-  @HiveField(2)
   final int level;
-
-  @HiveField(3)
   final int xp;
-
-  @HiveField(4)
   final int streak;
-
-  @HiveField(5)
   final String characterClass;
-
-  @HiveField(6)
   final Timestamp createdAt;
 
   UserModel({

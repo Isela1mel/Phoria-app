@@ -1,55 +1,44 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hive/hive.dart';
-part 'session_model.g.dart';
 
-@HiveType(typeId: 2)
-class SessionModel extends HiveObject {
-
-  @HiveField(0)
+class SessionModel {
+  final String? id;
   final String userId;
-
-  @HiveField(1)
   final String blockId;
-
-  @HiveField(2)
   final int duration;
-
-  @HiveField(3)
   final String type;
-
-  @HiveField(4)
-  final bool metodoExitoso;
-
-  @HiveField(5)
+  final bool exitoso;
   final Timestamp timestamp;
 
   SessionModel({
+    this.id,
     required this.userId,
     required this.blockId,
     required this.duration,
     required this.type,
-    required this.metodoExitoso,
+    required this.exitoso,
     required this.timestamp,
   });
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'userId': userId,
       'blockId': blockId,
       'duration': duration,
       'type': type,
-      'metodoExitoso': metodoExitoso,
+      'exitoso': exitoso,
       'timestamp': timestamp,
     };
   }
 
   factory SessionModel.fromMap(Map<String, dynamic> map) {
     return SessionModel(
+      id: map['id'],
       userId: map['userId'],
       blockId: map['blockId'],
       duration: map['duration'],
       type: map['type'],
-      metodoExitoso: map['metodoExitoso'],
+      exitoso: map['exitoso'],
       timestamp: map['timestamp'],
     );
   }

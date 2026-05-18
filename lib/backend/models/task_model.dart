@@ -1,31 +1,16 @@
-import 'package:hive/hive.dart';
-part 'task_model.g.dart';
-
-@HiveType(typeId: 1)
-class TaskModel extends HiveObject {
-
-  @HiveField(0)
+class TaskModel {
+  final String? id;
   final String userId;
-
-  @HiveField(1)
   final String title;
-
-  @HiveField(2)
   final String subject;
-
-  @HiveField(3)
   final int estimatedMins;
-
-  @HiveField(4)
   final int importance;
-
-  @HiveField(5)
   final String type;
-
-  @HiveField(6)
   final int xpReward;
+  final DateTime createdAt;
 
   TaskModel({
+    this.id,
     required this.userId,
     required this.title,
     required this.subject,
@@ -33,10 +18,12 @@ class TaskModel extends HiveObject {
     required this.importance,
     required this.type,
     required this.xpReward,
+    required this.createdAt,
   });
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'userId': userId,
       'title': title,
       'subject': subject,
@@ -44,11 +31,13 @@ class TaskModel extends HiveObject {
       'importance': importance,
       'type': type,
       'xpReward': xpReward,
+      'createdAt': createdAt,
     };
   }
 
   factory TaskModel.fromMap(Map<String, dynamic> map) {
     return TaskModel(
+      id: map['id'],
       userId: map['userId'],
       title: map['title'],
       subject: map['subject'],
@@ -56,6 +45,7 @@ class TaskModel extends HiveObject {
       importance: map['importance'],
       type: map['type'],
       xpReward: map['xpReward'],
+      createdAt: map['createdAt'],
     );
   }
 }

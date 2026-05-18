@@ -1,14 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:phoria_app/Screens/inicio.dart';
 import 'package:phoria_app/iu/bloque_inicio/horarioheader.dart';
 import 'package:phoria_app/iu/bloque_inicio/listo/listo_nombre.dart';
 import 'package:phoria_app/iu/bloque_inicio/listo/nuevo_jugador.dart';
 import 'package:phoria_app/iu/bloque_inicio/listo/tiempo_libre.dart';
 import 'package:phoria_app/navegacion/boton_siguiente.dart';
 import 'package:phoria_app/navegacion/main_navegacion.dart';
+import '../../backend/services/user_service.dart';
+import '../../backend/models/user_scheduel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Listo extends StatelessWidget {
-  const Listo({super.key});
+class Listo extends StatefulWidget {
+  final String horaSuenio;
+  final String horaLevantarse;
+
+  const Listo({
+    required this.horaSuenio,
+    required this.horaLevantarse,
+    super.key,
+  });
+
+  @override
+  State<Listo> createState() => _ListoState();
+}
+
+class _ListoState extends State<Listo> {
+  final _userService = UserService();
+  bool _cargando = false;
+
+  /// Guarda el horario fijo del usuario en Firestore (user_schedule)
+  Future<void> _guardarHorario() async {
+    setState(() => _cargando = true);
+    
+    try {
+      final uid = FirebaseAuth.instance.currentUser?.uid;
+      if (uid == null) throw Exception('Usuario no autenticado');
+
+      final suenioMinimo = int.tryParse(widget.horaSuenio) ?? 8;
+
+      final schedule = UserSchedule(
+        userId: uid,
+        entradaClases: '', 
+        salidaClases: '',
+        traslado: 30,
+        suenioMinimo: suenioMinimo,
+        horaLevantarse: widget.horaLevantarse,
+        createdAt: Timestamp.now(),
+      );
+
+      await _userService.guardarHorario(schedule);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Horario guardado exitosamente')),
+      );
+
+      // Redirigir al dashboard
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (_) => const MainNavegacion()),
+        (route) => false,
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: ${e.toString()}')),
+      );
+    } finally {
+      setState(() => _cargando = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,18 +110,8 @@ class Listo extends StatelessWidget {
                const SizedBox(height: 50), 
 
               BotonSiguiente(
-                text: 'Siguiente',
-                onTap: () {
-                   // ───────── CAMBIAR PANTALLA AQUÍ ─────────
-                   Navigator.pushAndRemoveUntil(
-                   context,
-
-                    MaterialPageRoute(
-                    builder: (_) => const MainNavegacion(),
-                      ),
-                       (route) => false,
-                  );
-                },
+                text: _cargando ? 'Guardando...' : 'Confirmar',
+                onTap: _cargando ? () {} : _guardarHorario,
               ),
               
             ],
