@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class bloques extends StatelessWidget {
-  const bloques({super.key});
+class Bloques extends StatelessWidget {
+  final List<Map<String, dynamic>> actividades;
+  const Bloques({super.key, required this.actividades});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-
+      children: [
         // ───────── Título ─────────
-        Opacity(
+        const Opacity(
           opacity: 0.5,
           child: Text(
             'HOY EN MIS BLOQUES',
@@ -20,24 +20,19 @@ class bloques extends StatelessWidget {
             ),
           ),
         ),
-
-        SizedBox(height: 16),
-
-        // ───────── Bloques ─────────
-        BloqueCard(
-          title: 'Escuela',
-          time: '7:00 - 14:00',
-          tag: 'Fijo',
-          isFixed: true,
-        ),
-
-        SizedBox(height: 12),
-
-        BloqueCard(
-          title: 'Estudiar Java',
-          time: '15:30 - 17:00',
-          tag: 'Hoy',
-        ),
+        const SizedBox(height: 16),
+        // ───────── Bloques dinámicos ─────────
+        ...actividades.map((act) => Column(
+              children: [
+                BloqueCard(
+                  title: act['title'] ?? '',
+                  time: act['time'] ?? '',
+                  tag: act['tag'] ?? '',
+                  isFixed: act['isFixed'] ?? false,
+                ),
+                const SizedBox(height: 12),
+              ],
+            )),
       ],
     );
   }

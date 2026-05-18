@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class tiempo extends StatelessWidget {
-  const tiempo({super.key});
 
-  // ───────── Datos ─────────
-  final String freeTime = '2h 40m';
-  final int percentage = 37;
+// CAMBIO: ahora el widget recibe los datos por parámetro, no hardcodeados
+class Tiempo extends StatelessWidget {
+  final String freeTime;
+  final int percentage;
+  const Tiempo({super.key, required this.freeTime, required this.percentage});
 
   @override
   Widget build(BuildContext context) {

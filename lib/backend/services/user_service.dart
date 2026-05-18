@@ -119,13 +119,24 @@ class UserService {
     return docRef.id;
   }
 
-  /// Guarda múltiples actividades (batch operation)
-  /// Si crea 2 actividades, se guardan 2 documentos
-  Future<List<String>> guardarMultiplesActividades(
-      List<ActivityBlockModel> actividades) async {
+  /// Guarda múltiples actividades (batch operation) SIN duplicar:
+  /// Antes: solo agregaba nuevas, causando duplicados.
+  /// Ahora: elimina todas las actividades anteriores y guarda solo las nuevas.
+  Future<List<String>> guardarMultiplesActividades(List<ActivityBlockModel> actividades) async {
     final uid = _auth.currentUser?.uid;
     if (uid == null) throw Exception('Usuario no autenticado');
 
+    // Eliminar todas las actividades anteriores
+    final snapshot = await _db
+        .collection('usuarios')
+        .doc(uid)
+        .collection('activity_blocks')
+        .get();
+    for (var doc in snapshot.docs) {
+      await doc.reference.delete();
+    }
+
+    // Guardar las nuevas actividades
     final ids = <String>[];
     for (var actividad in actividades) {
       final id = await guardarActividad(actividad);
