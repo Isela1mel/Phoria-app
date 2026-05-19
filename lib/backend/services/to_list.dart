@@ -3,6 +3,8 @@
 /// Este archivo contiene toda la lógica de organización, prioridad y acomodo.
 /// Solo depende de los servicios y modelos existentes.
 
+import 'package:phoria_app/tools/organizador_tools.dart';
+
 import 'task_service.dart';
 import 'block_service.dart';
 import '../models/task_model.dart';
@@ -104,18 +106,6 @@ class ToListOrganizer {
   }
 }
 
-class OrganizedTask {
-  final TaskModel tarea;
-  final String? bloqueId;
-  final DateTime inicio;
-  final DateTime fin;
-  OrganizedTask({
-    required this.tarea,
-    required this.bloqueId,
-    required this.inicio,
-    required this.fin,
-  });
-}
 
 class _TareaConPrioridad {
   final TaskModel tarea;
