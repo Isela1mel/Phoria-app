@@ -36,7 +36,7 @@ class UserModel {
       name: map['name'],
       email: map['email'],
       level: map['level'],
-      xp: map['xp'],
+      xp: map['xp'] ?? 0,
       streak: map['streak'],
       characterClass: map['characterClass'],
       createdAt: map['createdAt'],

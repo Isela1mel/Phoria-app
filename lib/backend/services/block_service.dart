@@ -2,6 +2,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/block_model.dart'; // Importamos BlockModel
 
 class BlockService {
+    /// Obtiene todos los bloques del usuario actual (opcional: filtrar por día)
+    Future<List<BlockModel>> obtenerBloquesUsuario(String uid, {DateTime? dia}) async {
+      Query query = _db.collection('blocks').where('userId', isEqualTo: uid);
+      if (dia != null) {
+        // Filtrar por día: buscar bloques cuyo 'iniciadoEn' sea ese día
+        final inicioDia = DateTime(dia.year, dia.month, dia.day);
+        final finDia = inicioDia.add(Duration(days: 1));
+        query = query
+          .where('iniciadoEn', isGreaterThanOrEqualTo: inicioDia)
+          .where('iniciadoEn', isLessThan: finDia);
+      }
+      final snap = await query.get();
+      return snap.docs.map((doc) => BlockModel.fromMap({...doc.data() as Map<String, dynamic>, 'id': doc.id})).toList();
+    }
   final _db = FirebaseFirestore.instance;
 
   /// Inicia un bloque y retorna el BlockModel completo

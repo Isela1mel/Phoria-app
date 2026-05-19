@@ -4,8 +4,17 @@ import '../models/task_model.dart';
 import 'xp_service.dart';
 
 class TaskService {
+    /// Obtiene todas las tareas pendientes del usuario actual
+    Future<List<TaskModel>> obtenerTareasPendientes() async {
+      final snap = await _db
+          .collection('tasks')
+          .where('userId', isEqualTo: uid)
+          .where('completada', isEqualTo: false)
+          .get();
+      return snap.docs.map(TaskModel.fromDoc).toList();
+    }
   final _db = FirebaseFirestore.instance;
-  String get _uid => FirebaseAuth.instance.currentUser!.uid;
+  String get uid => FirebaseAuth.instance.currentUser!.uid;
 
   // ── CREAR tarea nueva
   Future<void> crearTarea(TaskModel tarea) async {
@@ -17,7 +26,7 @@ class TaskService {
   Stream<List<TaskModel>> tareasStream() {
     return _db
       .collection('tasks')
-      .where('userId', isEqualTo: _uid)
+      .where('userId', isEqualTo: uid)
       .where('completada', isEqualTo: false)
       .snapshots()
       .map((snap) => snap.docs.map(TaskModel.fromDoc).toList());
@@ -27,7 +36,7 @@ class TaskService {
   Stream<List<TaskModel>> tareasCompletadasStream() {
     return _db
       .collection('tasks')
-      .where('userId', isEqualTo: _uid)
+      .where('userId', isEqualTo: uid)
       .where('completada', isEqualTo: true)
       .snapshots()
       .map((snap) => snap.docs.map(TaskModel.fromDoc).toList());
