@@ -24,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
 
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: const Color(0xFFE8E5E1),
@@ -35,16 +36,23 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: [
 
+                // Mascota arriba
+                Image.asset(
+                  'imagenes/Mascota_LR.png',
+                  width: screenWidth * 0.65,
+                  height: screenHeight * 0.35,
+                  fit: BoxFit.contain,
+                ),
+
+                SizedBox(height: screenHeight * 0.02),
+
+                // Contenedor con inputs
                 Container(
                   width: screenWidth * 0.85,
-
                   padding: const EdgeInsets.all(20),
-
                   decoration: BoxDecoration(
                     color: const Color(0xFF2E356D),
-
                     borderRadius: BorderRadius.circular(18),
-
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.25),

@@ -30,6 +30,7 @@ class _ListoState extends State<Listo> {
   final _userService = UserService();
   final _timeService = TimeService();
   bool _cargando = false;
+  String _userName = 'Usuario';
 
   int? _minutosLibres;
   bool _loadingTiempo = true;
@@ -77,7 +78,30 @@ class _ListoState extends State<Listo> {
   @override
   void initState() {
     super.initState();
+    _loadUserName();
     _calcularTiempoLibre();
+  }
+
+  Future<void> _loadUserName() async {
+    final user = FirebaseAuth.instance.currentUser;
+    
+    if (user != null) {
+      try {
+        final userDoc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .get();
+        
+        if (userDoc.exists) {
+          final name = userDoc.get('name') as String? ?? 'Usuario';
+          setState(() {
+            _userName = name;
+          });
+        }
+      } catch (e) {
+        debugPrint('Error loading user name: $e');
+      }
+    }
   }
 
   Future<void> _calcularTiempoLibre() async {
@@ -150,7 +174,7 @@ class _ListoState extends State<Listo> {
               const SizedBox(height: 20),
               const HorarioHeader(currentStep: 0),
               const SizedBox(height: 200),
-              const ListoNombre(userName: 'Melanie'),
+              ListoNombre(userName: _userName),
               const SizedBox(height: 50),
               _loadingTiempo
                   ? const CircularProgressIndicator()
