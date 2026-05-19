@@ -1,51 +1,60 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class TaskModel {
   final String? id;
+  final String titulo;
+  final String dificultad; // 'facil', 'medio', 'dificil'
+  final int xpReward; // se calcula según dificultad
+  final bool completada;
   final String userId;
-  final String title;
-  final String subject;
-  final int estimatedMins;
-  final int importance;
-  final String type;
-  final int xpReward;
-  final DateTime createdAt;
+  final DateTime fecha;
 
   TaskModel({
     this.id,
-    required this.userId,
-    required this.title,
-    required this.subject,
-    required this.estimatedMins,
-    required this.importance,
-    required this.type,
+    required this.titulo,
+    required this.dificultad,
     required this.xpReward,
-    required this.createdAt,
+    required this.completada,
+    required this.userId,
+    required this.fecha,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'userId': userId,
-      'title': title,
-      'subject': subject,
-      'estimatedMins': estimatedMins,
-      'importance': importance,
-      'type': type,
-      'xpReward': xpReward,
-      'createdAt': createdAt,
-    };
+  // ───────── XP según dificultad ─────────
+  static int xpPorDificultad(String d) {
+    switch (d) {
+      case 'dificil':
+        return 150;
+      case 'medio':
+        return 100;
+      case 'facil':
+        return 50;
+      default:
+        return 50;
+    }
   }
 
-  factory TaskModel.fromMap(Map<String, dynamic> map) {
+  // ───────── Convertir a Map ─────────
+  Map<String, dynamic> toMap() => {
+    'titulo': titulo,
+    'dificultad': dificultad,
+    'xpReward': xpReward,
+    'completada': completada,
+    'userId': userId,
+    'fecha': fecha.toIso8601String(),
+    'creadaEn': FieldValue.serverTimestamp(),
+  };
+
+  // ───────── Crear desde Firestore ─────────
+  factory TaskModel.fromDoc(DocumentSnapshot doc) {
+    final d = doc.data() as Map<String, dynamic>;
     return TaskModel(
-      id: map['id'],
-      userId: map['userId'],
-      title: map['title'],
-      subject: map['subject'],
-      estimatedMins: map['estimatedMins'],
-      importance: map['importance'],
-      type: map['type'],
-      xpReward: map['xpReward'],
-      createdAt: map['createdAt'],
+      id: doc.id,
+      titulo: d['titulo'],
+      dificultad: d['dificultad'],
+      xpReward: d['xpReward'],
+      completada: d['completada'],
+      userId: d['userId'],
+      fecha: DateTime.parse(d['fecha']),
     );
   }
 }

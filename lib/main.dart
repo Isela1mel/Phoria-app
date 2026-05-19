@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:phoria_app/firebase_options.dart';
 import 'package:phoria_app/Screens/login/login_pantalla.dart';
 import 'package:phoria_app/colores/temas.dart';
-import 'package:phoria_app/navegacion/main_navegacion.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

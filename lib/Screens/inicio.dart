@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../colores/temas.dart';
 import '../iu/inicio/header.dart';
 import '../iu/inicio/frase.dart';
 import '../iu/inicio/stats.dart';
@@ -9,7 +8,6 @@ import '../navegacion/boton_bloque.dart';
 
 // CAMBIO: Inicio ahora carga las actividades del backend y las pasa a Bloques
 import '../backend/services/user_service.dart';
-import '../backend/services/tiempo_servicio.dart';
 
 class Inicio extends StatefulWidget {
   const Inicio({super.key});

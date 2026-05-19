@@ -44,7 +44,7 @@ class FirestoreService {
         .get();
 
     return snapshot.docs
-        .map((doc) => TaskModel.fromMap(doc.data()))
+        .map((doc) => TaskModel.fromDoc(doc))
         .toList();
   }
 

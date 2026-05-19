@@ -4,13 +4,6 @@ import 'package:phoria_app/iu/voz/guardar_nota.dart';
 import 'package:phoria_app/iu/voz/transcripcion_voz.dart';
 import 'package:phoria_app/iu/voz/voler_guardar.dart';
 import 'package:phoria_app/iu/voz/voz_heater.dart';
-import '../colores/temas.dart';
-import '../iu/inicio/header.dart';
-import '../iu/inicio/frase.dart';
-import '../iu/inicio/stats.dart';
-import '../iu/inicio/tiempo.dart';
-import '../iu/inicio/bloques.dart';
-import '../navegacion/boton_bloque.dart';
 
 class Voz extends StatelessWidget {
   const Voz({super.key});
