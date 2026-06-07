@@ -1,13 +1,23 @@
 {
   "project_info": {
+<<<<<<< HEAD
     "project_number": "1080549766384",
     "project_id": "phoria-731ee",
     "storage_bucket": "phoria-731ee.firebasestorage.app"
+=======
+    "project_number": "377322616450",
+    "project_id": "phoria-application",
+    "storage_bucket": "phoria-application.firebasestorage.app"
+>>>>>>> 46596b7 (Base,Login y Registro neuvo funcionales)
   },
   "client": [
     {
       "client_info": {
+<<<<<<< HEAD
         "mobilesdk_app_id": "1:1080549766384:android:fd7ad238c16e44ce5dbe35",
+=======
+        "mobilesdk_app_id": "1:377322616450:android:2d0c12dfaa626d96c9e69b",
+>>>>>>> 46596b7 (Base,Login y Registro neuvo funcionales)
         "android_client_info": {
           "package_name": "com.example.phoria_app"
         }
@@ -15,7 +25,11 @@
       "oauth_client": [],
       "api_key": [
         {
+<<<<<<< HEAD
           "current_key": "AIzaSyCKIBJGOx9pyO8NeYlvvYrOCOk2gUQEv1U"
+=======
+          "current_key": "AIzaSyAYxVZlWyjb0xOBSWvJuzOIZDMYEGlBnWQ"
+>>>>>>> 46596b7 (Base,Login y Registro neuvo funcionales)
         }
       ],
       "services": {
