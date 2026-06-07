@@ -1,7 +1,3 @@
-/// Herramientas para organizar tareas automáticamente en bloques libres.
-///
-/// No contiene lógica de UI ni de guardado, solo procesamiento y organización.
-
 import '../backend/models/task_model.dart';
 import '../backend/models/block_model.dart';
 
