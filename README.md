@@ -1,22 +1,37 @@
-<<<<<<< HEAD
-# phoria_app
+#Phoria 
+App Anti-Procrastinación para Estudiantes
 
-A new Flutter project.
+Phoria es una aplicación móvil Android desarrollada en Flutter que ayuda a estudiantes a combatir la procrastinación digital. Calcula el tiempo libre real disponible en el día descontando clases, traslados y sueño, organiza tareas por dificultad con un sistema de XP y niveles, y registra el progreso semanal del usuario.
 
-## Getting Started
+# Funcionalidades
 
-This project is a starting point for a Flutter application.
+-Gestión de tiempo real 
+Calcula automáticamente las horas libres del día según el horario del usuario
 
-A few resources to get you started if this is your first Flutter project:
+-Sistema de tareas con XP
+Tareas clasificadas por dificultad (Fácil +10 · Medio +30 · Difícil +50 XP)
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+-Niveles de progreso
+El XP acumulado hace subir el nivel visible en el dashboard
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# Phoria-app
-Smart time control app for students that calculates real available time, blocks distractions, and helps you stay focused
->>>>>>> 4d0a16e080fe9f3c7eca85862a26f70f00637ad6
+-Estadísticas semanales
+Visualización del XP ganado y tareas completadas por día
+
+-Registro por voz
+Notas de estudio transcritas automáticamente
+
+-Autenticación
+Login y registro con Firebase Auth
+
+##  Stack tecnológico
+
+Frontend : Flutter 3.x + Dart
+Backend : Firebase Firestore 
+Auth : Firebase Authentication 
+
+Requiere configurar Firebase con tu propio `firebase_options.dart` usando FlutterFire CLI.
+
+#Equipo
+
+Contreras Cornelio Melanie Isela
+Hernandez Coria Dahna Elizabeth
